@@ -16,6 +16,7 @@ RUN apk add --no-cache \
     openssl-dev \
     git \
     openssh \
+    bash \
     supervisor
 
 RUN touch /var/log/msmtp.log && chown www-data: /var/log/msmtp.log
