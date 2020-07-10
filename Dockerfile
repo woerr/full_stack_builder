@@ -50,23 +50,10 @@ RUN docker-php-ext-install sockets && \
 #     && .travis/build.sh \
 #     && docker-php-ext-enable ssh2 
 
-RUN sed -i "s|pm.max_children =.*|pm.max_children = 80|" /usr/local/etc/php-fpm.d/www.conf && \
-    sed -i "s|pm.start_servers =.*|pm.start_servers = 15|" /usr/local/etc/php-fpm.d/www.conf && \
-    sed -i "s|^listen\s+.*|listen /var/run/fpm.sock|" /usr/local/etc/php-fpm.d/www.conf && \
-    sed -i "s|pm.min_spare_servers =.*|pm.min_spare_servers = 10|" /usr/local/etc/php-fpm.d/www.conf && \
-    sed -i "s|pm.max_spare_servers =.*|pm.max_spare_servers = 40|" /usr/local/etc/php-fpm.d/www.conf 
 
 RUN ln -sf /usr/bin/msmtp /usr/sbin/sendmail
 
 ENV PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d:/usr/local/etc/php/conf.d/addict.conf
 
-COPY config/php.ini /usr/local/etc/php/php.ini
-COPY config/addict.conf /usr/local/etc/php/conf.d/addict.conf
-COPY config/supervisord.conf /etc/supervisor/supervisord.conf
-COPY config/mailConfig /etc/msmtprc
-
-COPY entrypoint.sh /entrypoint.sh
-
-RUN chmod 755 /entrypoint.sh
-
-CMD  "/entrypoint.sh"
+CMD ["-"]
+ENTRYPOINT ["php"]
