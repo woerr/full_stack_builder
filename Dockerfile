@@ -33,7 +33,6 @@ RUN docker-php-ext-install \
     zip \
     bcmath \
     pcntl \
-    mcrypt \ 
     mbstring
 
 RUN pecl install imagick && docker-php-ext-enable imagick
