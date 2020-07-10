@@ -33,7 +33,9 @@ RUN docker-php-ext-install \
     intl \
     zip \
     bcmath \
-    pcntl
+    pcntl \
+    mcrypt \ 
+    mbstring
 
 RUN pecl install imagick && docker-php-ext-enable imagick
 RUN pecl install xdebug && docker-php-ext-enable xdebug
