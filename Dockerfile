@@ -20,8 +20,7 @@ RUN apk add --no-cache \
 
 RUN touch /var/log/msmtp.log && chown www-data: /var/log/msmtp.log
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
+RUN docker-php-ext-install gd
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
