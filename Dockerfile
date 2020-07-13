@@ -51,6 +51,7 @@ RUN docker-php-ext-install sockets && \
 #     && .travis/build.sh \
 #     && docker-php-ext-enable ssh2 
 
+RUN mkdir -p /root/.ssh
 
 RUN ln -sf /usr/bin/msmtp /usr/sbin/sendmail
 
