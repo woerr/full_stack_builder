@@ -44,7 +44,7 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN docker-php-ext-install sockets && \
     docker-php-ext-enable sockets
 
-RUN set +e;
+RUN set -xe;
 
 #install ssh2 
 # RUN cd /tmp \
