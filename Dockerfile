@@ -2,7 +2,7 @@ FROM debian:stretch
 
 RUN set -xe;
 
-RUN apt-get update --no-cache && \
+RUN apt-get update && \
     apt-get install -y curl wget && \
     apt-get install -y tzdata && \
     apt install software-properties-common -y && \
