@@ -44,6 +44,8 @@ RUN pecl install redis && docker-php-ext-enable redis
 RUN docker-php-ext-install sockets && \
     docker-php-ext-enable sockets
 
+RUN set +e;
+
 #install ssh2 
 # RUN cd /tmp \
 #     && git clone https://git.php.net/repository/pecl/networking/ssh2.git \
