@@ -1,62 +1,12 @@
-FROM php:7.3.19-cli-alpine3.12
+FROM ubuntu:18.04
+RUN apt-get update && apt-get install -y curl wget && apt-get install -y tzdata && apt install software-properties-common -y && add-apt-repository ppa:ondrej/php
 
-RUN apk add --no-cache \
-    freetype \
-    libpng \
-    libjpeg-turbo \
-    freetype-dev \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    icu-dev \
-    libzip-dev \
-    imagemagick \
-    imagemagick-dev \
-    msmtp \
-    pcre-dev ${PHPIZE_DEPS} \
-    openssl-dev \
-    git \
-    openssh \
-    bash \
-    supervisor
+RUN && apt-get install -y sshpass && apt-get install -y nodejs git yarn && mkdir /weldbook && mkdir /weldbook/dist && mkdir /weldbook/src && mkdir /weldbook/ssh && mkdir /weldbook/sh && mkdir /root/.ssh/ 
 
-RUN touch /var/log/msmtp.log && chown www-data: /var/log/msmtp.log
-
-RUN docker-php-ext-install gd
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN docker-php-ext-install \
-    mysqli \
-    opcache \
-    pdo \
-    pdo_mysql \
-    intl \
-    zip \
-    bcmath \
-    pcntl \
-    mbstring
-
-RUN pecl install imagick && docker-php-ext-enable imagick
-RUN pecl install xdebug && docker-php-ext-enable xdebug
-RUN pecl install mongodb && docker-php-ext-enable mongodb
-RUN pecl install redis && docker-php-ext-enable redis
-
-RUN docker-php-ext-install sockets && \
-    docker-php-ext-enable sockets
+RUN  apt install php7.3 php7.3-common php7.3-mysql php7.3-xml php7.3-xmlrpc php7.3-curl php7.3-gd php7.3-imagick php7.3-mbstring php7.3-zip php7.3-intl rsync php-sockets composer  -y
 
 RUN set -xe;
 
-#install ssh2 
-# RUN cd /tmp \
-#     && git clone https://git.php.net/repository/pecl/networking/ssh2.git \
-#     && cd /tmp/ssh2/ \
-#     && .travis/build.sh \
-#     && docker-php-ext-enable ssh2 
-
 RUN mkdir -p /root/.ssh
-
-RUN ln -sf /usr/bin/msmtp /usr/sbin/sendmail
-
-ENV PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d:/usr/local/etc/php/conf.d/addict.conf
-
+WORKDIR /weldbook
 CMD ["/bin/bash", "-c"]
