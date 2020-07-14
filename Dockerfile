@@ -57,4 +57,4 @@ RUN ln -sf /usr/bin/msmtp /usr/sbin/sendmail
 
 ENV PHP_INI_SCAN_DIR=/usr/local/etc/php/conf.d:/usr/local/etc/php/conf.d/addict.conf
 
-CMD ["-"]
+CMD ["/bin/bash"]
