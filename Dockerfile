@@ -1,5 +1,8 @@
- FROM ubuntu:18.04
-RUN apt-get update && \
+FROM debian:stretch
+
+RUN set -xe;
+
+RUN apt-get update --no-cache && \
     apt-get install -y curl wget && \
     apt-get install -y tzdata && \
     apt install software-properties-common -y && \
@@ -14,12 +17,11 @@ RUN apt-get install -y sshpass && \
     mkdir /weldbook/sh && \
     mkdir /root/.ssh/ 
 
-RUN  apt install php7.3 php7.3-common php7.3-mysql \
-    php7.3-xml php7.3-xmlrpc php7.3-curl php7.3-gd \
-    php7.3-imagick php7.3-mbstring php7.3-zip \
-    php7.3-intl rsync php-sockets composer -y
-
-RUN set -xe;
+RUN apt install php7.3 php7.3-common php7.3-mysql \
+    php7.3-xml php7.3-xmlrpc php7.3-curl php7.3-gd -y
+RUN apt install php7.3-imagick php7.3-mbstring php7.3-zip \
+    php7.3-intl php-pear rsync composer -y
+RUN phpenmod sockets
 
 RUN mkdir -p /root/.ssh
 WORKDIR /weldbook
